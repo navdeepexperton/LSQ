@@ -137,8 +137,6 @@ def home():
                'Last_Activity_Outcome_y', 'Activity_Disposition_y', 'Created On_y'], axis=1, inplace=True)
 
     Lead.to_csv('Lead.csv', index=False)
-
-    Lead.to_csv('Lead.csv', index=False)
     with open('Lead.csv', 'rb') as file_obj:
         content = file_obj.read()
         gc.import_csv(spreadsheet.id, data=content)
