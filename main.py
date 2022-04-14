@@ -104,9 +104,6 @@ def home():
             Lead = pd.concat([Lead, LSQ])
     Lead['Created On'] = pd.to_datetime(Lead['Created On'], format='%Y/%m/%d %H:%M:%S')
     Lead = Lead[Lead['CP_Code'].isnull() == False]
-    lst = ['Activity_Disposition', 'Last_Activity_Outcome', 'Last_Activity_Sub_Outcome']
-    for i in lst:
-        Lead[i].fillna('Fresh Lead', inplace=True)
     Lead.reset_index(inplace=True)
     Lead.drop('index', inplace=True, axis=1)
 
@@ -134,6 +131,9 @@ def home():
                          'Last_Activity_Sub_Outcome_x': 'Last_Activity_Sub_Outcome',
                          'Last_Activity_Outcome_x': 'Last_Activity_Outcome',
                          'Activity_Disposition_x': 'Activity_Disposition', 'Created On_x': 'Created On'}, inplace=True)
+    lst = ['Activity_Disposition', 'Last_Activity_Outcome', 'Last_Activity_Sub_Outcome']
+    for i in lst:
+        Lead[i].fillna('Fresh Lead', inplace=True)
     Lead.drop(['Full Name_y', 'EmailAddress_y', 'CP_Code_y', 'CP_Name_y', 'Lead Stage_y', 'Last_Activity_Sub_Outcome_y',
                'Last_Activity_Outcome_y', 'Activity_Disposition_y', 'Created On_y'], axis=1, inplace=True)
 
