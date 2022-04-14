@@ -1,10 +1,11 @@
 from flask import Flask,redirect
-import datetime
+from datetime import datetime
+from datetime import timedelta
 import numpy as np
 import pandas as pd
 import gspread
 import json
-import request
+import requests
 from oauth2client.service_account import ServiceAccountCredentials
 from google.oauth2.service_account import Credentials
 
@@ -135,6 +136,8 @@ def home():
                          'Activity_Disposition_x': 'Activity_Disposition', 'Created On_x': 'Created On'}, inplace=True)
     Lead.drop(['Full Name_y', 'EmailAddress_y', 'CP_Code_y', 'CP_Name_y', 'Lead Stage_y', 'Last_Activity_Sub_Outcome_y',
                'Last_Activity_Outcome_y', 'Activity_Disposition_y', 'Created On_y'], axis=1, inplace=True)
+
+    Lead.to_csv('Lead.csv', index=False)
 
     Lead.to_csv('Lead.csv', index=False)
     with open('Lead.csv', 'rb') as file_obj:
