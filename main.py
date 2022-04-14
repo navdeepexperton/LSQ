@@ -104,6 +104,9 @@ def home():
             Lead = pd.concat([Lead, LSQ])
     Lead['Created On'] = pd.to_datetime(Lead['Created On'], format='%Y/%m/%d %H:%M:%S')
     Lead = Lead[Lead['CP_Code'].isnull() == False]
+    lst = ['Activity_Disposition', 'Last_Activity_Outcome', 'Last_Activity_Sub_Outcome']
+    for i in lst:
+        Lead[i].fillna('Fresh Lead', inplace=True)
     Lead.reset_index(inplace=True)
     Lead.drop('index', inplace=True, axis=1)
 
@@ -124,16 +127,13 @@ def home():
     Lead['Last_Activity_Sub_Outcome_x'] = Lead['Last_Activity_Sub_Outcome_x'].fillna(
         Lead['Last_Activity_Sub_Outcome_y'])
     Lead['Last_Activity_Outcome_x'] = Lead['Last_Activity_Outcome_x'].fillna(Lead['Last_Activity_Outcome_y'])
-    Lead['Activity_Disposition_x'] = Lead['Activity_Disposition_x'].fillna(Lead['Activity_Disposition_x'])
+    Lead['Activity_Disposition_x'] = Lead['Activity_Disposition_x'].fillna(Lead['Activity_Disposition_y'])
     Lead['Created On_x'] = Lead['Created On_x'].fillna(Lead['Created On_y'])
     Lead.rename(columns={'Full Name_x': 'Full Name', 'EmailAddress_x': 'EmailAddress', 'CP_Code_x': 'CP_Code',
                          'CP_Name_x': 'CP_Name', 'Lead Stage_x': 'Lead Stage',
                          'Last_Activity_Sub_Outcome_x': 'Last_Activity_Sub_Outcome',
                          'Last_Activity_Outcome_x': 'Last_Activity_Outcome',
                          'Activity_Disposition_x': 'Activity_Disposition', 'Created On_x': 'Created On'}, inplace=True)
-    lst = ['Activity_Disposition', 'Last_Activity_Outcome', 'Last_Activity_Sub_Outcome']
-    for i in lst:
-        Lead[i].fillna('Fresh Lead', inplace=True)
     Lead.drop(['Full Name_y', 'EmailAddress_y', 'CP_Code_y', 'CP_Name_y', 'Lead Stage_y', 'Last_Activity_Sub_Outcome_y',
                'Last_Activity_Outcome_y', 'Activity_Disposition_y', 'Created On_y'], axis=1, inplace=True)
 
