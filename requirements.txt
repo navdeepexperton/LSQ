@@ -14,7 +14,7 @@ gspread == 5.2.0
 google-auth-oauthlib == 0.5.1
 google-auth == 2.6.2
 requests == 2.27.1
-jsons = 1.6.1
+jsons
 
 
 
