@@ -13,11 +13,11 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     today = datetime.today()
-    yesterday = today - timedelta(days=1)
+    yesterday = today - timedelta(days=3)
     today1 = today.strftime("%Y-%m-%d %H:%M:%S")
     yesterday1 = yesterday.strftime("%Y-%m-%d %H:%M:%S")
     Lead = pd.DataFrame()
-    for i in range(1, 6):
+    for i in range(1, 10):
         lead_squared_access_key = 'u$r9d756da850aa2e17ae61f497b2bc99c3'
         lead_squared_secret_key = '2b8db837b12d22937d2e95e2cb257af189ab0342'
         url = 'https://api-in21.leadsquared.com/v2/LeadManagement.svc/Leads.RecentlyModified?accessKey=%s&secretKey=%s' % (
